@@ -9,9 +9,9 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 A modern Flutter plugin for Okta OIDC authentication enabling secure user login, token management, and identity integration using OpenID Connect with Okta services.
                        DESC
-  s.homepage         = 'https://github.com/eebrahimjoy/okta_oidc_plus'
+  s.homepage         = 'https://eebrahimjoy.com'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Okta OIDC Plus' => 'support@example.com' }
+  s.author           = { 'Eebrahim Joy' => 'eebrahimjoy@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'

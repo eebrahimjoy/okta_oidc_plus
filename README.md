@@ -103,21 +103,30 @@ if (response != null && response['status'] == true) {
 }
 ```
 
-### 3. Fetch Access Token
+### 3. Social Sign-In
+
+```dart
+final response = await oktaOidcPlus.socialLogin({
+  "idp": "YOUR_IDP_ID",
+  "idp-scope": "email profile",
+});
+```
+
+### 4. Fetch Access Token
 
 ```dart
 final tokenResponse = await oktaOidcPlus.getAccessToken();
 final accessToken = tokenResponse?['message'];
 ```
 
-### 4. Fetch User Profile
+### 5. Fetch User Profile
 
 ```dart
 final userProfile = await oktaOidcPlus.getUserProfile();
 print(userProfile);
 ```
 
-### 5. Sign Out
+### 6. Sign Out
 
 ```dart
 final isLoggedOut = await oktaOidcPlus.logout();
@@ -131,6 +140,16 @@ Check out the included [`example`](example) application featuring a production-r
 - **Domain Layer**: Entities (`UserEntity`, `AuthStatus`), Repositories, and UseCases (`LoginUseCase`, `LogoutUseCase`, `GetUserProfileUseCase`, `GetAccessTokenUseCase`).
 - **Data Layer**: DataSources (`OktaRemoteDataSource`), Models (`UserModel`), and Repository Implementations.
 - **Presentation Layer**: State Notification (`AuthNotifier`), Custom Theme, Glassmorphism UI Components, and Dashboard views.
+
+---
+
+## Author & Contact
+
+Developed and maintained by **Eebrahim Joy**.
+
+- 📧 **Email**: [eebrahimjoy@gmail.com](mailto:eebrahimjoy@gmail.com)
+- 🌐 **Website**: [eebrahimjoy.com](https://eebrahimjoy.com)
+- 🐙 **GitHub**: [@eebrahimjoy](https://github.com/eebrahimjoy)
 
 ---
 
