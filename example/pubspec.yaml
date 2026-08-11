@@ -1,5 +1,6 @@
 name: okta_oidc_plus_example
-description: Demonstrates how to use the okta_oidc_plus plugin using Clean Architecture.
+description: A modern Flutter plugin for Okta OIDC authentication enabling secure user login, token management, and identity integration using OpenID Connect with Okta services.
+version: 1.0.0
 publish_to: 'none'
 
 environment:
