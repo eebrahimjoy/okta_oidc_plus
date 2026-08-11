@@ -1,0 +1,7 @@
+# 1.0.0
+
+- **Breaking Change**: Renamed package from `okta_oidc` to `okta_oidc_plus`.
+- **Android**: Added explicit `namespace 'com.okta.okta_oidc_plus'` in plugin `build.gradle` (fixes AGP 8+ build issue). Updated `minSdkVersion` to 21, `compileSdkVersion` to 34, and Java target to 17.
+- **iOS**: Upgraded minimum deployment target to iOS 13.0+, updated Swift plugin bindings.
+- **Example App**: Complete architectural overhaul using **Clean Architecture** (Domain, Data, Presentation layers) with a modern dark theme and custom glassmorphism design system.
+- **Code Quality**: Updated Dart SDK constraint (`>=3.0.0 <4.0.0`), resolved all lint warnings and deprecated API usages.
