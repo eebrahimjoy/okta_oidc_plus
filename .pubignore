@@ -1,0 +1,9 @@
+# Ignore example project from pub.dev upload package
+example/
+
+# Ignore build & temporary directories
+.dart_tool/
+.idea/
+.vscode/
+build/
+*.log

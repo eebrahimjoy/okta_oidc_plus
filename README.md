@@ -136,7 +136,7 @@ final isLoggedOut = await oktaOidcPlus.logout();
 
 ## Sample App & Clean Architecture
 
-Check out the included [`example`](example) application featuring a production-ready **Clean Architecture** layout:
+Check out the full [Sample Application on GitHub](https://github.com/eebrahimjoy/okta_oidc_plus/tree/main/example) featuring a production-ready **Clean Architecture** layout:
 - **Domain Layer**: Entities (`UserEntity`, `AuthStatus`), Repositories, and UseCases (`LoginUseCase`, `LogoutUseCase`, `GetUserProfileUseCase`, `GetAccessTokenUseCase`).
 - **Data Layer**: DataSources (`OktaRemoteDataSource`), Models (`UserModel`), and Repository Implementations.
 - **Presentation Layer**: State Notification (`AuthNotifier`), Custom Theme, Glassmorphism UI Components, and Dashboard views.
@@ -145,7 +145,7 @@ Check out the included [`example`](example) application featuring a production-r
 
 ## Author & Contact
 
-Developed and maintained by **Eebrahim Joy**.
+Developed and maintained by **Ebrahim Joy**.
 
 - 📧 **Email**: [eebrahimjoy@gmail.com](mailto:eebrahimjoy@gmail.com)
 - 🌐 **Website**: [eebrahimjoy.com](https://eebrahimjoy.com)
