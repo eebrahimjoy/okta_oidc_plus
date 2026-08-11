@@ -1,3 +1,9 @@
+# 1.0.1
+
+- Package optimization: Excluded example app build artifacts from pub package upload via `.pubignore` for a lightweight package download.
+- Added direct GitHub repository link for full Clean Architecture sample app in `README.md`.
+- Updated author metadata and contact links (`eebrahimjoy@gmail.com`, `eebrahimjoy.com`).
+
 # 1.0.0
 
 - **Breaking Change**: Renamed package from `okta_oidc` to `okta_oidc_plus`.
