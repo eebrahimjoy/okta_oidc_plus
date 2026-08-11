@@ -1,130 +1,61 @@
-library;
+import 'okta_oidc_plus_platform_interface.dart';
 
-export 'src/models/okta_oidc_auth_result.dart';
-export 'src/models/okta_oidc_config.dart';
-export 'src/models/okta_oidc_user_profile.dart';
-
-import 'src/models/okta_oidc_auth_result.dart';
-import 'src/models/okta_oidc_config.dart';
-import 'src/models/okta_oidc_user_profile.dart';
-import 'src/okta_oidc_plus_platform_interface.dart';
-
-/// The main entry point for the [OktaOidcPlus] Flutter plugin package.
+/// Primary plugin class for managing Okta OIDC operations.
 ///
-/// Published and maintained by [Ebrahim Joy](https://eebrahimjoy.com).
+/// Developed and maintained by Eebrahim Joy (https://eebrahimjoy.com).
 class OktaOidcPlus {
-  OktaOidcPlus._();
-
-  /// Singleton instance of [OktaOidcPlus].
-  static final OktaOidcPlus instance = OktaOidcPlus._();
-
-  /// Default factory constructor returning the singleton instance for legacy compatibility.
-  factory OktaOidcPlus() => instance;
-
-  // --- Modern Strongly-Typed API ---
-
-  /// Initializes the Okta plugin with the specified strongly-typed [config].
-  Future<bool> initialize({required OktaOidcConfig config}) {
-    return OktaOidcPlusPlatform.instance.initialize(config);
-  }
-
-  /// Performs interactive Okta user sign-in returning an [OktaOidcAuthResult].
-  Future<OktaOidcAuthResult> signIn() async {
-    try {
-      final res = await OktaOidcPlusPlatform.instance.signIn();
-      if (res != null) {
-        return OktaOidcAuthResult.fromMap(res);
+  /// Initializes the Okta OIDC SDK with configuration details.
+  ///
+  /// Required keys in [oktaConfig]:
+  /// - `client_id`
+  /// - `redirect_uri`
+  /// - `end_session_redirect_uri`
+  /// - `discovery_uri`
+  Future<bool?> initOkta(Map<String, dynamic>? oktaConfig) {
+    if (oktaConfig != null) {
+      if (oktaConfig['client_id'] == null ||
+          (oktaConfig['client_id'] as String).isEmpty) {
+        throw ArgumentError('Please provide a valid Okta client_id');
+      } else if (oktaConfig['redirect_uri'] == null ||
+          (oktaConfig['redirect_uri'] as String).isEmpty) {
+        throw ArgumentError('Please provide a valid Okta redirect_uri');
+      } else if (oktaConfig['end_session_redirect_uri'] == null ||
+          (oktaConfig['end_session_redirect_uri'] as String).isEmpty) {
+        throw ArgumentError(
+          'Please provide a valid Okta end_session_redirect_uri',
+        );
+      } else if (oktaConfig['discovery_uri'] == null ||
+          (oktaConfig['discovery_uri'] as String).isEmpty) {
+        throw ArgumentError('Please provide a valid Okta discovery_uri');
       }
-      return OktaOidcAuthResult.failure('Sign in returned null response.');
-    } catch (e) {
-      return OktaOidcAuthResult.failure('Sign in error: ${e.toString()}');
+      return OktaOidcPlusPlatform.instance.initOkta(oktaConfig);
+    } else {
+      throw ArgumentError('Please provide valid Okta configuration');
     }
   }
 
-  /// Performs social login using identity provider [idp].
-  Future<OktaOidcAuthResult> signInWithIdp({
-    required String idp,
-    String? scope,
-  }) async {
-    try {
-      final res = await OktaOidcPlusPlatform.instance.signInWithIdp(idp, scope);
-      if (res != null) {
-        return OktaOidcAuthResult.fromMap(res);
-      }
-      return OktaOidcAuthResult.failure('Social login returned null response.');
-    } catch (e) {
-      return OktaOidcAuthResult.failure('Social login error: ${e.toString()}');
-    }
+  /// Initiates sign-in flow via web browser redirect.
+  Future<Map<dynamic, dynamic>?> login() {
+    return OktaOidcPlusPlatform.instance.login();
   }
 
-  /// Fetches current access token returning an [OktaOidcAuthResult].
-  Future<OktaOidcAuthResult> fetchAccessToken() async {
-    try {
-      final res = await OktaOidcPlusPlatform.instance.fetchAccessToken();
-      if (res != null) {
-        return OktaOidcAuthResult.fromMap(res);
-      }
-      return OktaOidcAuthResult.failure('Fetch access token returned null.');
-    } catch (e) {
-      return OktaOidcAuthResult.failure('Fetch access token error: ${e.toString()}');
-    }
+  /// Initiates social login flow with identity provider settings.
+  Future<Map<dynamic, dynamic>?> socialLogin(Map<String, String> map) {
+    return OktaOidcPlusPlatform.instance.socialLogin(map);
   }
 
-  /// Fetches Okta UserInfo claims profile returning an [OktaOidcUserProfile].
-  Future<OktaOidcUserProfile?> fetchUserProfile() async {
-    try {
-      final res = await OktaOidcPlusPlatform.instance.fetchUserProfile();
-      if (res != null) {
-        if (res is String) {
-          return OktaOidcUserProfile.fromJsonString(res);
-        } else if (res is Map<String, dynamic>) {
-          return OktaOidcUserProfile.fromClaims(res);
-        }
-      }
-      return null;
-    } catch (_) {
-      return null;
-    }
+  /// Obtains active access token or triggers token refresh.
+  Future<Map<dynamic, dynamic>?> getAccessToken() {
+    return OktaOidcPlusPlatform.instance.getAccessToken();
   }
 
-  /// Signs out and invalidates the user session.
-  Future<bool> signOut() {
-    return OktaOidcPlusPlatform.instance.signOut();
-  }
-
-  // --- Legacy Backward Compatibility API ---
-
-  /// Legacy helper method for initializing with a [Map] configuration.
-  Future<bool?> initOkta(Map<String, dynamic>? configMap) async {
-    if (configMap == null) return false;
-    final config = OktaOidcConfig.fromJson(configMap);
-    return initialize(config: config);
-  }
-
-  /// Legacy helper method returning raw token response [Map].
-  Future<Map?> login() {
-    return OktaOidcPlusPlatform.instance.signIn();
-  }
-
-  /// Legacy helper method for social login with map parameters.
-  Future<Map?> socialLogin(Map<String, String> map) {
-    final idp = map['idp'] ?? '';
-    final scope = map['idp-scope'];
-    return OktaOidcPlusPlatform.instance.signInWithIdp(idp, scope);
-  }
-
-  /// Legacy helper method returning access token [Map].
-  Future<Map?> getAccessToken() {
-    return OktaOidcPlusPlatform.instance.fetchAccessToken();
-  }
-
-  /// Legacy helper method returning user profile response.
-  Future<dynamic> getUserProfile() {
-    return OktaOidcPlusPlatform.instance.fetchUserProfile();
-  }
-
-  /// Legacy helper method clearing user session.
+  /// Revokes tokens and signs the user out.
   Future<bool?> logout() {
-    return OktaOidcPlusPlatform.instance.signOut();
+    return OktaOidcPlusPlatform.instance.logout();
+  }
+
+  /// Retrieves user profile payload/claims.
+  Future<dynamic> getUserProfile() {
+    return OktaOidcPlusPlatform.instance.getUserProfile();
   }
 }
