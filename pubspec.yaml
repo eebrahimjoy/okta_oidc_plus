@@ -1,6 +1,6 @@
 name: okta_oidc_plus
 description: A modern Flutter plugin for Okta OIDC authentication enabling secure user login, token management, and identity integration using OpenID Connect with Okta services.
-version: 1.0.1
+version: 1.0.2
 homepage: https://eebrahimjoy.com
 repository: https://github.com/eebrahimjoy/okta_oidc_plus
 issue_tracker: https://github.com/eebrahimjoy/okta_oidc_plus/issues

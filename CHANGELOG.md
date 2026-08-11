@@ -1,3 +1,7 @@
+# 1.0.2
+
+- Removed unnecessary `shared_preferences` dependency from example app repository implementation for complete zero-external-dependency self-containment.
+
 # 1.0.1
 
 - Package optimization: Excluded example app build artifacts from pub package upload via `.pubignore` for a lightweight package download.

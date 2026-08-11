@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'okta_oidc_plus'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'A Flutter plugin for Okta OIDC authentication.'
   s.description      = <<-DESC
 A modern Flutter plugin for Okta OIDC authentication enabling secure user login, token management, and identity integration using OpenID Connect with Okta services.

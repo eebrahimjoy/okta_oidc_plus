@@ -1,6 +1,3 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../core/constants/app_constants.dart';
 import '../../core/error/failures.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -9,6 +6,7 @@ import '../models/user_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final OktaRemoteDataSource remoteDataSource;
+  bool _sessionActive = false;
 
   AuthRepositoryImpl({required this.remoteDataSource});
 
@@ -26,8 +24,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final response = await remoteDataSource.login();
       if (response != null && (response['status'] == true)) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setBool(AppConstants.isLoggedInKey, true);
+        _sessionActive = true;
         return true;
       }
       return false;
@@ -41,8 +38,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final result = await remoteDataSource.logout();
       if (result ?? false) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.remove(AppConstants.isLoggedInKey);
+        _sessionActive = false;
         return true;
       }
       return false;
@@ -76,7 +72,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<bool> isSessionActive() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(AppConstants.isLoggedInKey) ?? false;
+    return _sessionActive;
   }
 }
