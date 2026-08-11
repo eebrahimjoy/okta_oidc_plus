@@ -10,7 +10,15 @@ A modern, high-performance Flutter plugin for Okta OIDC authentication. Seamless
 - 🌐 **Social Sign-In**: Support for LinkedIn, Google, Apple, and custom IDP identity providers.
 - 🔑 **Automatic Token Refresh**: Transparently fetches and renews access tokens.
 - 👤 **User Claims & Profile**: Direct access to authenticated user claims payload.
-- 🏗️ **Clean Architecture Example**: Bundled with a production-ready Clean Architecture sample app.
+- 🏗️ **Clean Architecture Example**: Production-ready Clean Architecture sample app available on GitHub.
+
+---
+
+## Example
+
+Check out the full, runnable sample app built using **Clean Architecture**:
+
+👉 **[View Sample App on GitHub](https://github.com/eebrahimjoy/okta_oidc_plus/tree/main/example)**
 
 ---
 
@@ -20,7 +28,7 @@ Add `okta_oidc_plus` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  okta_oidc_plus: ^1.0.0
+  okta_oidc_plus: ^1.0.2
 ```
 
 ### Platform Setup
@@ -136,7 +144,7 @@ final isLoggedOut = await oktaOidcPlus.logout();
 
 ## Sample App & Clean Architecture
 
-Check out the full [Sample Application on GitHub](https://github.com/eebrahimjoy/okta_oidc_plus/tree/main/example) featuring a production-ready **Clean Architecture** layout:
+Explore the [`example`](https://github.com/eebrahimjoy/okta_oidc_plus/tree/main/example) repository layout:
 - **Domain Layer**: Entities (`UserEntity`, `AuthStatus`), Repositories, and UseCases (`LoginUseCase`, `LogoutUseCase`, `GetUserProfileUseCase`, `GetAccessTokenUseCase`).
 - **Data Layer**: DataSources (`OktaRemoteDataSource`), Models (`UserModel`), and Repository Implementations.
 - **Presentation Layer**: State Notification (`AuthNotifier`), Custom Theme, Glassmorphism UI Components, and Dashboard views.
@@ -145,7 +153,7 @@ Check out the full [Sample Application on GitHub](https://github.com/eebrahimjoy
 
 ## Author & Contact
 
-Developed and maintained by **Ebrahim Joy**.
+Developed and maintained by **Eebrahim Joy**.
 
 - 📧 **Email**: [eebrahimjoy@gmail.com](mailto:eebrahimjoy@gmail.com)
 - 🌐 **Website**: [eebrahimjoy.com](https://eebrahimjoy.com)
